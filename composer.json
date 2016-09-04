@@ -1,0 +1,23 @@
+{
+    "name": "codemash/laravel-socket",
+    "description": "A socket implementation for Laravel 5",
+    "version": "1.0.0",
+    "require": {
+        "cboden/ratchet": "^0.3.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Van Parijs",
+            "email": "matvp91@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Codemash\\Socket\\": "src/"
+        }
+    },
+    "post-update-cmd": [
+        "php artisan vendor:publish"
+    ]
+}
