@@ -172,7 +172,9 @@ Finally, let's run the socket listener. You can do this by running the following
 php artisan socket:listen
 ```
 
-## Using Eloquent models
+## Client connections
+
+### Using Eloquent models
 
 Laravel Socket reads the session when available and maps the `User` eloquent model to your client. You can then retrieve the Eloquent model by using the following code:
 
@@ -187,6 +189,26 @@ foreach ($clients as $client) {
 ```
 
 Whenever you're using the clients list, like `$event->clients`, this is a Laravel Collection object. Methods such as filter, map, and so on, work very well on it.
+
+### Storing client related data
+
+Client objects implement magic methods, meaning you can set any kind of additional properties during the life cycle of the server running. If you access a non existant property, it will however trigger an exception. Imagine you'd like to set a `connected_at` property containing the timestamp when the client connected. We'll add this property to the `onConnected` method in our event listener as seen below:
+
+```php
+public function onConnected(ClientConnected $event)
+{
+    $event->client->connected_at = Carbon::now();
+}
+
+public function onMessageReceived(MessageReceived $event)
+{
+    if (event->message->command === 'whenDidIConnect') {
+        if (isset($event->from->connected_at)) {
+            $event->from->send('iConnectedAt', $event->from->connected_at->toString());
+        }
+    }
+}
+```
 
 ## Production
 
