@@ -202,7 +202,7 @@ public function onConnected(ClientConnected $event)
 
 public function onMessageReceived(MessageReceived $event)
 {
-    if (event->message->command === 'whenDidIConnect') {
+    if ($event->message->command === 'whenDidIConnect') {
         if (isset($event->from->connected_at)) {
             $event->from->send('iConnectedAt', $event->from->connected_at->toString());
         }
