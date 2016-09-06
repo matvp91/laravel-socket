@@ -12,7 +12,7 @@ Laravel 5.x.
 You can install the package using the [Composer](https://getcomposer.org/) package manager. You can install it by running this command in your project root:
 
 ```sh
-composer require codemash/socket
+composer require codemash/laravel-socket
 ```
 
 Add the `Codemash\Socket\SocketServiceProvider` provider to the `providers` array in `config/app.php`':
