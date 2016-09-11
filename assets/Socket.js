@@ -49,6 +49,8 @@ var Socket = function (url) {
         };
 
         this.connection.onclose = function (event) {
+            _this.connected = false;
+            
             _this.triggerEvent('disconnected', null, event);
         };
     };
