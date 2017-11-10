@@ -13,7 +13,7 @@ class Clients extends Collection {
      */
     public function findByConnection($connection)
     {
-        return $this->first(function ($key, $client) use ($connection) {
+        return $this->first(function ($client, $key) use ($connection) {
             return $client->connection === $connection;
         });
     }
